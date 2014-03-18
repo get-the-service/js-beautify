@@ -154,9 +154,8 @@
         // and the next special character found opens
         // a new block
         function foundNestedPseudoClass() {
-            var ch = source_text[pos];
             for (var i = pos + 1; i < source_text.length; i++){
-                ch = source_text.charAt(i);
+                var ch = source_text.charAt(i);
                 if (ch === "{"){
                     return true;
                 } else if (ch === ";" || ch === "}" || ch === ")") {
