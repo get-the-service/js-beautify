@@ -1841,6 +1841,10 @@ function run_beautifier_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         // Test for issue #414
         btc("time {\n  &:first-letter {\n    text-transform: uppercase;\n  }\n}\n");
 
+        // Do not indent if we encounter a semicolon outside of a rule
+        // Could be the case in SASS when defining variables
+        btc("$test: #495936;$test_two: #593955;", "$test: #495936;\n$test_two: #593955;\n");
+
         return sanitytest;
     }
 

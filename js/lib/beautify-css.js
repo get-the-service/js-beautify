@@ -154,11 +154,25 @@
         // and the next special character found opens
         // a new block
         function foundNestedPseudoClass() {
-            for (var i = pos + 1; i < source_text.length; i++){
+            for (var i = pos + 1; i < source_text.length; i++) {
                 var ch = source_text.charAt(i);
                 if (ch === "{"){
                     return true;
                 } else if (ch === ";" || ch === "}" || ch === ")") {
+                    return false;
+                }
+            }
+        }
+
+        // Sass variable definition starts with a $
+        // followed by text and then a colon and
+        // is outside of rule
+        function foundSassVariableDefinition() {
+            for (var i = pos - 1; i >= 0; i--) {
+                var ch = source_text.charAt(i);
+                if (ch === "$") {
+				    return true;
+                } else if (ch === "}") {
                     return false;
                 }
             }
@@ -293,6 +307,10 @@
                         // pseudo-element
                         next();
                         output.push("::");
+                    } else if (foundSassVariableDefinition()) {
+                        // SASS variable definition, have space after
+                        // colon
+                        output.push(":", ' ');
                     } else {
                         // pseudo-class
                         output.push(ch);
@@ -341,6 +359,16 @@
             } else if (ch === '[' || ch === '=') { // no whitespace before or after
                 eatWhitespace();
                 output.push(ch);
+            } else if (ch === "$") {
+                if (!insideRule && lookBack(' ')) {
+                    // we are outside of a rule and encounter a $
+                    // -> This is a SASS variable definition so remove
+                    // indentation
+                    output.splice(pos - 1, 1);
+                    output.push(ch)
+                } else {
+                    output.push(ch);
+                }
             } else {
                 if (isAfterSpace) {
                     print.singleSpace();

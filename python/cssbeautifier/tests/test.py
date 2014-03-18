@@ -107,6 +107,15 @@ class CSSBeautifierTest(unittest.TestCase):
 
         t("time {\n  &:first-letter {\n    text-transform: uppercase;\n }\n}\n")
 
+    def testSassVariableDefinition(self):
+        self.resetOptions()
+        self.options.indent_size = 2
+        self.options.indent_char = ' '
+        self.options.selector_separator_newline = False
+        t = self.decodesto
+
+        t("$test: #495936;$test_two: #593955;", "$test: #495936;\n$test_two: #593955;\n")
+
     def decodesto(self, input, expectation=None):
         self.assertEqual(
             cssbeautifier.beautify(input, self.options), expectation or input)
