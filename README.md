@@ -1,5 +1,5 @@
 # JS Beautifier
-[![Build Status](https://secure.travis-ci.org/einars/js-beautify.png?branch=master)](http://travis-ci.org/einars/js-beautify)
+[![Build Status](https://secure.travis-ci.org/beautify-web/js-beautify.png?branch=master)](http://travis-ci.org/beautify-web/js-beautify)
 [![NPM version](https://badge.fury.io/js/js-beautify.png)](http://badge.fury.io/js/js-beautify)
 
 This little beautifier will reformat and reindent bookmarklets, ugly
@@ -178,5 +178,6 @@ useful or working for you but you must keep the copyright notice and license. (M
 Thanks also to Jason Diamond, Patrick Hof, Nochum Sossonko, Andreas Schneider, Dave
 Vasilevsky, Vital Batmanov, Ron Baldwin, Gabriel Harrison, Chris J. Shull,
 Mathias Bynens, Vittorio Gambaletta and others.
-js-beautify@1.3.4
+
+js-beautify@1.5.1
 

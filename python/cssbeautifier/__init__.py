@@ -303,7 +303,11 @@ class Beautifier:
                     printer.singleSpace()
             elif self.ch == ']':
                 printer.push(self.ch)
-            elif self.ch == '[' or self.ch == '=':
+            elif self.ch == '[':
+                if isAfterSpace:
+                    printer.singleSpace()
+                printer.push(self.ch)
+            elif self.ch == '=':
                 # no whitespace before or after
                 self.eatWhitespace()
                 printer.push(self.ch)

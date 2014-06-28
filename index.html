@@ -115,9 +115,9 @@
             padding-top: 8px;
         }
     </style>
+
     <script src="web/third-party/jquery/jquery.js"></script>
     <script src="web/third-party/jquery/jquery.cookie.js"></script>
-
 
     <script src="js/lib/beautify.js"></script>
     <script src="js/lib/beautify-css.js"></script>
@@ -143,7 +143,13 @@
             P_A_C_K_E_R.run_tests(st);
             Urlencoded.run_tests(st);
             MyObfuscate.run_tests(st);
-            var results = st.results_raw().replace(/ /g, '&nbsp;').replace(/\r/g, '·').replace(/\n/g, '<br>');
+            var results = st.results_raw()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/ /g, '&nbsp;')
+                .replace(/\r/g, '·')
+                .replace(/\n/g, '<br>');
             $('#testresults').html(results).show();
         }
 
@@ -232,7 +238,7 @@
             opts.indent_size = $('#tabsize').val();
             opts.indent_char = opts.indent_size == 1 ? '\t' : ' ';
             opts.max_preserve_newlines = $('#max-preserve-newlines').val();
-            opts.preserve_newlines = opts.max_preserve_newlines !== -1;
+            opts.preserve_newlines = opts.max_preserve_newlines !== "-1";
             opts.keep_array_indentation = $('#keep-array-indentation').prop('checked');
             opts.break_chained_methods = $('#break-chained-methods').prop('checked');
             opts.indent_scripts = $('#indent-scripts').val();
@@ -277,7 +283,7 @@
             <a class="self" href="./">Beautify, unpack or deobfuscate JavaScript and HTML, make JSON/JSONP readable, etc.</a>
         </p>
         <p>
-            All of the source code is completely free and open, available on the <a href="https://github.com/einars/js-beautify">github</a> under MIT licence,
+            All of the source code is completely free and open, available on the <a href="https://github.com/beautify-web/js-beautify">github</a> under MIT licence,
             <br>and we have a command-line version, python library and a <a href="https://npmjs.org/package/js-beautify">node package</a> as well.
         </p>
     </div>
